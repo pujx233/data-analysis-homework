@@ -1,6 +1,4 @@
 # -*- codeing = utf-8 -*-
-# @Time: 2020-05-12 20:09
-# @Author: Claws
 # @File: TestDownload.py
 # @Software: PyCharm
 # @Description: 下载所有题目信息
