@@ -67,9 +67,9 @@ class FullCodeUnit(Unit):
         elif self.dirType == 2:
             self.path = self.baseDir + self.testId + '_' + self.userId + '_' + self.upid
         elif self.dirType == 3:
-            self.path = self.baseDir + self.userId + '/' + self.testId + '_' + self.upid
+            self.path = self.baseDir + self.userId + '/' + self.testId + '/' + self.upid
         elif self.dirType == 4:
-            self.path = self.baseDir + self.testId + '/' + self.userId + '_' + self.upid
+            self.path = self.baseDir + self.testId + '/' + self.userId + '/' + self.upid
         else:
             pass
         self.path += '.zip'

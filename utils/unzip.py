@@ -56,7 +56,7 @@ def unzip_record(zip_src):
         try:
             os.rename(need_py_file, py_file_name)
         except Exception:
-            print('\033[7;31mwarn || 解压失败！可能文件已经存在\033[0m')
+            print('warn || 解压失败！可能文件已经存在')
 
 
 # 解压问题zip包中包含的有用信息：
