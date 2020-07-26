@@ -2,7 +2,7 @@ import json
 import pyecharts.options as opts
 from pyecharts.charts import Radar
 
-f = open('../../data/users_analysis_source.json', encoding='utf-8')
+f = open('../data/users_analysis_source.json', encoding='utf-8')
 res = f.read()
 data = json.loads(res)
 
