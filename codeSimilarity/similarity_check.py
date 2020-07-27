@@ -109,7 +109,7 @@ def getCheatItems(cpath):
     print(cpath, "完成~")
     return cheat_list
 
-if __name__ == '__main__':
+def main():
     pool = multiprocessing.Pool(multiprocessing.cpu_count())
     # 创建一个workbook
     workbook = xlwt.Workbook(encoding='utf-8')
@@ -185,26 +185,32 @@ if __name__ == '__main__':
         print("user_cheat_exercises 加载完成")
 
 
-    #更新updated Database of Mooctest.json
+    #更新data_all.json
 
-    fp=open("../data/updatedDatabase of Mooctest.json","r",encoding="utf8")
+    fp=open("../data/data_all.json","r",encoding="utf8")
     data=json.load(fp)
     fp.close()
     fp_2=open("../data/exercise_cheat_users.json","r",encoding="utf8")
     data_users=json.load(fp_2)
     fp_2.close()
     for key in data.keys():
+        num_of_iscopy=0
         for index,item in enumerate(data[key]["records"]):
             if (key in data_users.keys()):
                 if(item["user_id"] in data_users[key]["user_id"]):
                     data[key]["records"][index]["is_copy"]=True
+                    num_of_iscopy+=1
                 else:
                     data[key]["records"][index]["is_copy"] = False
             else:
                 data[key]["records"][index]["is_copy"] = False
+        data[key]["num_of_iscopy"]=num_of_iscopy
 
-    with open("../data/updatedDatabase of Mooctest.json","w") as fp_3:
+    with open("../data/data_all.json","w") as fp_3:
         json.dump(data,fp_3,indent=4)
+
+if __name__ == '__main__':
+    main()
 
 
 
