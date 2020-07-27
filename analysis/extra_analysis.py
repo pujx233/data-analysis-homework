@@ -9,20 +9,20 @@ def analysis_valid():
     for key in data.keys():
         num_of_isvalid = 0
         for index, item in enumerate(data[key]["records"]):
-            is_valid=False
+            is_valid=True
             if "is_cpp" in item.keys():
                 if item["is_cpp"]==True:
-                    is_valid=True
+                    is_valid=False
             elif "is_case-oriented" in item.keys():
                 if item["is_case-oriented"]==True:
-                    is_valid=True
+                    is_valid=False
             elif "is_answer" in item.keys():
                 if item["is_answer"]==True:
-                    is_valid=True
+                    is_valid=False
             elif "is_copy" in item.keys():
                 if item["is_copy"]==True:
-                    is_valid=True
-            data[key]["records"]["is_valid"]=is_valid
+                    is_valid=False
+            data[key]["records"][index]["is_valid"]=is_valid
             if is_valid:
                 num_of_isvalid+=1
         data[key]["num_of_isvalid"]=num_of_isvalid
