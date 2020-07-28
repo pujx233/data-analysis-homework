@@ -1,40 +1,50 @@
 import json
 import math
 import numpy as np
+import pandas as pd
 from statistics import mean
 
 upload_times_rate=0.3
-upload_intervals=0.1
-score_rate=0.5
+# upload_intervals=0.1
+score_rate=0.6
 pass_rate=0.1
 
 
-#利用离散程度来判断使用平均数还是中位数
-def get_score(std,avg,median):
-    if std>10:
-        return median
-    else:
-        return avg
+
+def get_grades(max,min,data):
+    grades={}
+    for key in data.keys():
+        grade=1 + (5-1) / (max -min) * (data[key] - min)
+        print(grade)
+        grades[key]=grade
+    return grades
 
 
 
-def map_difficulty(max,min):
-    grade=(max-min)/5
-    return [min,min+grade,min+grade*2,min+grade*3,min+grade*4]
-
-def get_grade(grades,data):
-    for i in range(0,len(grades)):
-        if(data>grades[i]):
-            return i+1
 
 
 def get_difficulty(data):
+    upload_times={}
+    intervals={}
+    scores={}
+    passes={}
+
     for case_id, details in data.items():
         records = details["records"]
-        upload_times_ratio=
+        upload_times[case_id]=details["total_upload_times"]
+        scores[case_id] = details["score_average"]
+        passes[case_id] = details["pass_rate"]
 
+    upload_times_grades=get_grades(np.max(list(upload_times.values())),np.min(list(upload_times.values())),upload_times)
+    scores_grades=get_grades(np.max(list(scores.values())),np.min(list(scores.values())),scores)
+    passes_grades=get_grades(np.max(list(passes.values())),np.min(list(passes.values())),passes)
 
+    for case_id, details in data.items():
+        records = details["records"]
+        difficulty=round((upload_times_grades[case_id]*upload_times_rate+scores_grades[case_id]*score_rate*passes_grades[case_id]*pass_rate)*10)/10
+        details["difficulty"]=difficulty
 
+    return data
 
 
 

@@ -1,6 +1,7 @@
 import codeSimilarity.similarity_check as sc
 import analysis.detect_analysis as da
 import analysis.extra_analysis as ea
+import analysis.difficulty_analysis as diff_a
 
 
 #生成data_all.json文件
@@ -20,4 +21,5 @@ if __name__ == '__main__':
     ea.analysis_score()
 
     #将难度情况写入data_all.json文件中
+    diff_a.main()
 
