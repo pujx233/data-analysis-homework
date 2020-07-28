@@ -11,17 +11,18 @@ import os
 import matplotlib
 import analysis.data_functions as df
 
-#根目录
-rPath=os.path.abspath(os.path.join(os.path.dirname(__file__),".."))
+# 根目录
+rPath = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+matplotlib.rcParams['font.family'] = 'STSong'
+matplotlib.rcParams['font.size'] = 12
 
 
-matplotlib.rcParams['font.family']='STSong'
-matplotlib.rcParams['font.size']=12
 def plotCaseCheatRanking():
-    data=df.case_cheat_ranking()
-    X=data.keys()
-    Y=data.values()
-    plt.bar(X,Y,color='blue')
+    data = df.case_cheat_ranking()
+    X = data.keys()
+    Y = data.values()
+    plt.bar(X, Y, color='blue')
     plt.xlabel('题目ID')
     plt.ylabel('作弊人数')
     plt.title('抄袭人数最多的题目排名')
@@ -32,11 +33,12 @@ def plotCaseCheatRanking():
     plt.savefig(path)
     plt.show()
 
+
 def plotUserCheatRanking():
-    data=df.user_cheat_ranking()
-    X=data.keys()
-    Y=data.values()
-    plt.bar(X,Y,color='pink')
+    data = df.user_cheat_ranking()
+    X = data.keys()
+    Y = data.values()
+    plt.bar(X, Y, color='pink')
     plt.xlabel('学生ID')
     plt.ylabel('抄袭题目数量')
     plt.title('抄袭题目最多的学生排名')
@@ -48,9 +50,6 @@ def plotUserCheatRanking():
     plt.savefig(path)
 
     plt.show()
-
-
-
 
 
 if __name__ == '__main__':

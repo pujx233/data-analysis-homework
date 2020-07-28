@@ -4,7 +4,6 @@ import json
 
 
 def detect(data):
-    
     new_data = {}
     count = 0
     for user_id, details in data.items():
@@ -24,8 +23,8 @@ def detect(data):
         count += 1
     return analyse(new_data)
 
-def analyse(data: list):
 
+def analyse(data: list):
     for case_id, details in data.items():
         records = details["records"]
 
@@ -48,7 +47,6 @@ def analyse(data: list):
 
         data[case_id]["total_upload_times"] = sum([record["upload_times"] for record in records])
         data[case_id]["user_count"] = len(records)
-
 
         # 检测代码行数 & 面向用例情况 & 是否为python
         num_of_iscpp = 0  # 非python计数
@@ -101,15 +99,16 @@ def analyse(data: list):
         data[case_id]["num_of_iscpp"] = num_of_iscpp
         data[case_id]["num_of_is_case-oriented"] = num_of_isco
 
-
     return data
+
 
 def main():
     with open('../data/test_data.json', encoding='utf-8') as f:
         data = json.loads(f.read())
-        data=detect(data)
+        data = detect(data)
         with open("../data/data_all.json", 'w', encoding='utf-8')as json_file:
             json.dump(data, json_file, ensure_ascii=False, indent=4)
+
 
 if __name__ == '__main__':
     main()

@@ -7,8 +7,7 @@ res = f.read()
 data = json.loads(res)
 
 for k in data.keys():
-    v=[data[k]["score"]]
-
+    v = [data[k]["score"]]
 
     (
         Radar(init_opts=opts.InitOpts())
@@ -33,7 +32,7 @@ for k in data.keys():
             .add(
             series_name="得分分布",
             data=v,
-            linestyle_opts=opts.LineStyleOpts(color="#ff5722",width=3,opacity=0.7),
+            linestyle_opts=opts.LineStyleOpts(color="#ff5722", width=3, opacity=0.7),
         )
             .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
             .set_global_opts(

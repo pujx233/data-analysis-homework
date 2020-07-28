@@ -2,8 +2,9 @@ import codeSimilarity.similarity_check as sc
 import analysis.detect_analysis as da
 import analysis.extra_analysis as ea
 import analysis.difficulty_analysis as diff_a
-
+import json
 # 生成data_all.json文件
+
 
 
 if __name__ == '__main__':
@@ -21,3 +22,10 @@ if __name__ == '__main__':
 
     # 将难度情况写入data_all.json文件中
     diff_a.main()
+
+    with open('../data/updatedDatabase of Mooctest.json', encoding='utf-8') as f:
+        data = json.loads(f.read())
+        for case_id, details in data.items():
+            for name in ["case_zip", "records", "num_of_testCases", "group", "median", "std"]:
+                del details[name]
+    save_as_file(data, "../data/simplifiedDatabase of Mooctest.json")
