@@ -124,8 +124,8 @@ def main():
 
     cpaths = os.listdir(mpath)
     # 对py文件进行预处理(去除空行和注释)(已进行预处理,故注释掉)
-    # pool.map(filterFiles,cpaths)
-    # print("文件修改完成")
+    pool.map(filterFiles,cpaths)
+    print("文件修改完成")
 
     cheat_lists=pool.map(getCheatItems,cpaths)
     print(cheat_lists)

@@ -1,5 +1,6 @@
 import json
 import os
+import numpy as np
 
 
 #根目录
@@ -70,4 +71,31 @@ def user_cheat_ranking():
             if (count >= 10):
                 break
     return ranks
+
+def get_cheat_ratio_difficulty():
+    temp={}
+    fp=open("../data/simplified_data.json","r",encoding="utf-8")
+    data=json.load(fp)
+    for case_id, details in data.items():
+        cheat_ratio=round(details["num_of_isco"]/details["user_count"]*100)
+        temp.setdefault(details["difficulty"],[])
+        temp[details["difficulty"]].append(cheat_ratio)
+
+    difficultys=[]
+    cheat_ratios=[]
+    temp=dict(sorted(temp.items(),key=lambda item:item[0]))
+    for difficulty,arrays in temp.items():
+        avg=round(np.mean(arrays))
+        difficultys.append(difficulty)
+        cheat_ratios.append(avg)
+    return difficultys,cheat_ratios
+
+
+
+
+
+
+
+
+
 

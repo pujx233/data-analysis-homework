@@ -4,17 +4,24 @@ import numpy as np
 import pandas as pd
 from statistics import mean
 
-upload_times_rate = 0.3
+upload_times_rate = 0.5
 # upload_intervals=0.1
-score_rate = 0.6
-pass_rate = 0.1
+score_rate = 0.3
+pass_rate = 0.2
 
 
 def get_grades(max, min, data):
     grades = {}
     for key in data.keys():
         grade = 1 + (5 - 1) / (max - min) * (data[key] - min)
-        print(grade)
+        grades[key] = grade
+
+    return grades
+
+def get_grades_2(max,min,data):
+    grades = {}
+    for key in data.keys():
+        grade =5 - (5 - 1) / (max - min) * (data[key] - min)
         grades[key] = grade
     return grades
 
@@ -33,13 +40,26 @@ def get_difficulty(data):
 
     upload_times_grades = get_grades(np.max(list(upload_times.values())), np.min(list(upload_times.values())),
                                      upload_times)
-    scores_grades = get_grades(np.max(list(scores.values())), np.min(list(scores.values())), scores)
-    passes_grades = get_grades(np.max(list(passes.values())), np.min(list(passes.values())), passes)
+    scores_grades = get_grades_2(np.max(list(scores.values())), np.min(list(scores.values())), scores)
+    passes_grades = get_grades_2(np.max(list(passes.values())), np.min(list(passes.values())), passes)
 
     for case_id, details in data.items():
         records = details["records"]
-        difficulty = round((upload_times_grades[case_id] * upload_times_rate + scores_grades[case_id] * score_rate *
+        if(upload_times_grades[case_id]>=4.8 or scores_grades[case_id]>=4.8 or passes_grades[case_id]>=4.8):
+            difficulty=5
+        else:
+            difficulty = round((upload_times_grades[case_id] * upload_times_rate + scores_grades[case_id] * score_rate +
                             passes_grades[case_id] * pass_rate) * 10) / 10
+            if(difficulty>1.15 and difficulty<1.7):
+                difficulty=2.0
+            elif(difficulty>=1.7 and difficulty<2.45):
+                difficulty=3.0
+            elif (difficulty >= 2.45 and difficulty < 3.3):
+                difficulty = 4.0
+            elif (difficulty >= 3.3 and difficulty <=5):
+                difficulty = 5.0
+        print(round(difficulty))
+
         details["difficulty"] = int(round(difficulty))
 
     return data
