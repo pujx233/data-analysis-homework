@@ -12,7 +12,7 @@ mpath =rPath+"/LatestCodeDownload"
 #获得作弊代码总数量
 def getCheatCodeNums():
     codeNums=0
-    with open("../data/exercise_cheat_users.json") as fp:
+    with open("../data/exercise_cheat_users.json","r",encoding="utf-8") as fp:
         data=json.load(fp)
         for key in data.keys():
             codeNums=codeNums+data[key]["total"]
@@ -40,14 +40,14 @@ def getUserTotal():
 
 #获得作弊用户数量
 def getCheatUserNums():
-    with open("../data/user_cheat_exercises.json") as fp:
+    with open("../data/user_cheat_exercises.json","r",encoding="utf-8") as fp:
         data=json.load(fp)
     return len(data.keys())
 
 #获得抄袭人数最多的题目排名
 def case_cheat_ranking():
     ranks={}
-    with open("../data/exercise_cheat_users.json") as fp:
+    with open("../data/exercise_cheat_users.json","r",encoding="utf-8") as fp:
         data = json.load(fp)
         count=0
         for key in data.keys():
@@ -61,7 +61,7 @@ def case_cheat_ranking():
 #获得抄袭题目最多的学生排名
 def user_cheat_ranking():
     ranks = {}
-    with open("../data/user_cheat_exercises.json") as fp:
+    with open("../data/user_cheat_exercises.json","r",encoding="utf-8") as fp:
         data = json.load(fp)
         count = 0
         for key in data.keys():

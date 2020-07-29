@@ -22,7 +22,7 @@ def detect_is_answer(path1, path2):
 #第二种方法:ssdeep
 #获得py文件的哈希值
 def get_hash(path):
-    f = open(path, 'r',encoding='UTF-8')
+    f = open(path, 'r',encoding='utf-8')
     lines = [l.strip() for l in f.readlines()]
     codes = ""
     for line in lines:

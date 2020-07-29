@@ -8,7 +8,7 @@ import json
 filter_code={}
 
 def filter(path):
-    fp=open(path,"r",encoding="utf8")
+    fp=open(path,"r",encoding="utf-8")
     data=json.load(fp)
     for key in data.keys():
         filter_code.setdefault(key,[])

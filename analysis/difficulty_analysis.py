@@ -40,18 +40,18 @@ def get_difficulty(data):
         records = details["records"]
         difficulty = round((upload_times_grades[case_id] * upload_times_rate + scores_grades[case_id] * score_rate *
                             passes_grades[case_id] * pass_rate) * 10) / 10
-        details["difficulty"] = difficulty
+        details["difficulty"] = int(round(difficulty))
 
     return data
 
 
 def main():
-    fp = open("../data/data_all.json", "r", encoding="utf8")
+    fp = open("../data/data_all.json", "r", encoding="utf-8")
     data = json.load(fp)
     fp.close()
     data = get_difficulty(data)
-    with open("../data/data_all.json", "w") as fp_3:
-        json.dump(data, fp_3, indent=4)
+    with open("../data/data_all.json", "w", encoding="utf-8") as fp_3:
+        json.dump(data, fp_3, ensure_ascii=False,indent=4)
 
 
 if __name__ == '__main__':

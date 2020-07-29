@@ -91,7 +91,7 @@ def getCheatItems(cpath):
         stu_item.path=path
         stu_items.append(stu_item)
     #找到不符合的代码
-    dataPath = "../data/updatedDatabase of Mooctest.json"
+    dataPath = "../data/data_all.json"
     filter_code=cf.filter(dataPath)
     # 找到cheat_list
     cheat_list = []
@@ -158,7 +158,7 @@ def main():
 
     exercise_cheat_users = dict(sorted(exercise_cheat_users.items(), key=lambda item: item[1]["total"], reverse=True))
 
-    with open("../data/exercise_cheat_users.json","w") as f:
+    with open("../data/exercise_cheat_users.json","w", encoding="utf-8") as f:
         json.dump(exercise_cheat_users,f,indent=4)
         print("exercise_cheat_users 加载完成")
 
@@ -180,17 +180,17 @@ def main():
 
     user_cheat_exercises= dict(sorted(user_cheat_exercises.items(), key=lambda item: item[1]["total"], reverse=True))
 
-    with open("../data/user_cheat_exercises.json","w") as f:
+    with open("../data/user_cheat_exercises.json","w",encoding="utf-8") as f:
         json.dump(user_cheat_exercises,f,indent=4)
         print("user_cheat_exercises 加载完成")
 
 
     #更新data_all.json
 
-    fp=open("../data/data_all.json","r",encoding="utf8")
+    fp=open("../data/data_all.json","r",encoding="utf-8")
     data=json.load(fp)
     fp.close()
-    fp_2=open("../data/exercise_cheat_users.json","r",encoding="utf8")
+    fp_2=open("../data/exercise_cheat_users.json","r",encoding="utf-8")
     data_users=json.load(fp_2)
     fp_2.close()
     for key in data.keys():
@@ -206,8 +206,8 @@ def main():
                 data[key]["records"][index]["is_copy"] = False
         data[key]["num_of_iscopy"]=num_of_iscopy
 
-    with open("../data/data_all.json","w") as fp_3:
-        json.dump(data,fp_3,indent=4)
+    with open("../data/data_all.json","w",encoding="utf-8") as fp_3:
+        json.dump(data,fp_3,ensure_ascii=False,indent=4)
 
 if __name__ == '__main__':
     main()
