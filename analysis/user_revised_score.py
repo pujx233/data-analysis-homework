@@ -40,10 +40,6 @@ for i in load_dict:  # i为学生id j为case_id
                        dir[i]['查找算法平均得分'], dir[i]['数组平均得分'], dir[i]['线性表平均得分']]
 
 for i in load_dict:  # i为学生id j为case_id
-    num = len(load_dict[i]['cases'])
-    dir[i]['提交习题'] = num
-    dir[i]['提交占比'] = num/200
-    num = 0
     for j in load_dict[i]['cases']:
         if j["case_type"] == '字符串':
             dir[i]['字符串提交次数'] += 1
