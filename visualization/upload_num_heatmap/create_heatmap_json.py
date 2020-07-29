@@ -15,7 +15,7 @@ for k in new_data.keys():
 
 for k in data_.keys():
     for case_id in data_[k].keys():
-        if (case_id == "user_id"):
+        if case_id == "user_id":
             pass
         else:
             for time in data_[k][case_id]:
