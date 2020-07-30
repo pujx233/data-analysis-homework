@@ -91,6 +91,45 @@ def get_cheat_ratio_difficulty():
     return difficultys,cheat_ratios
 
 
+def get_avg_difficulty():
+    temp = {}
+    fp = open("../data/simplified_data.json", "r", encoding="utf-8")
+    data = json.load(fp)
+    for case_id, details in data.items():
+        temp.setdefault(details["case_type"],[])
+        temp[details["case_type"]].append(details["difficulty"])
+
+    types=[]
+    avg_diffs=[]
+    for type, arrays in temp.items():
+        types.append(type)
+        avg_diffs.append(np.mean(arrays))
+
+    return types,avg_diffs
+
+def get_type_diff_nums():
+    temp = {}
+    fp = open("../data/simplified_data.json", "r", encoding="utf-8")
+    data = json.load(fp)
+    for case_id, details in data.items():
+        temp.setdefault(details["case_type"],[])
+        temp[details["case_type"]].append(details["difficulty"])
+
+    types=[]
+    diff_nums=[[0,0,0,0,0,0,0,0] for i in range(0,5)]
+    index=0
+    for type, arrays in temp.items():
+        types.append(type)
+        for diff in arrays:
+            diff_nums[diff-1][index]+=1
+        index+=1
+    print(diff_nums)
+    return types,diff_nums
+
+
+
+
+
 
 
 

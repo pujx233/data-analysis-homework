@@ -11,7 +11,6 @@ import ssdeep
 #第一种方法
 # 检测抄袭答案
 def detect_is_answer(path1, path2):
-
     def get_similarity_ratio(s, t):
         return difflib.SequenceMatcher(None, s, t).quick_ratio()
 
@@ -47,8 +46,26 @@ def get_similarity(path1,path2):
         score=ssdeep_score*0.2+difflib_score*0.8
         return round(score)
 
-# path1="../LatestCodeDownload/2102/60638.py"
-# path2="../LatestCodeDownload/2102/60792.py"
-#
-# print(detect_is_answer(path1,path2))
+
+
+def get_cheat_html(path1,path2):
+    diff = difflib.HtmlDiff()
+    fp = open(path1, "r", encoding="utf-8")
+    data_1 = fp.readlines()
+    fp.close()
+
+    fp_2 = open(path2, "r", encoding="utf-8")
+    data_2 = fp_2.readlines()
+    fp_2.close()
+
+    content = diff.make_file(data_1, data_2)
+
+    with open("../data/test.html", 'w', encoding="utf-8") as f:
+        f.write(content)
+
+
+path1="../LatestCodeDownload/2061/60635.py"
+path2="../LatestCodeDownload/2061/49405.py"
+
+detect_is_answer(path1,path2)
 # print(ssdeep_compare(path1,path2))
